@@ -1,7 +1,6 @@
 use ansi_term::{ANSIString, Style};
-
+use crate::fs::{File, FileTarget};
 use crate::fs::fields as f;
-
 
 impl f::Type {
     pub fn render<C: Colours>(self, colours: &C) -> ANSIString<'static> {

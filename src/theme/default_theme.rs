@@ -13,13 +13,13 @@ impl UiStyles {
             filekinds: FileKinds {
                 normal:       Style::default(),
                 directory:    Fixed(244).bold(),
-                symlink:      Cyan.normal(),
+                symlink:      Style::default(),
                 pipe:         Yellow.normal(),
                 block_device: Yellow.bold(),
                 char_device:  Yellow.bold(),
                 socket:       Red.bold(),
                 special:      Yellow.normal(),
-                executable:   Fixed(208).bold(),
+                executable:   Fixed(166).bold(),
             },
 
             perms: Permissions {
@@ -73,7 +73,7 @@ impl UiStyles {
             octal:        Purple.normal(),
             header:       Style::default().underline(),
 
-            symlink_path:         Cyan.normal(),
+            symlink_path:         Fixed(117).normal(),
             control_char:         Red.normal(),
             broken_symlink:       Red.normal(),
             broken_path_overlay:  Style::default().underline(),

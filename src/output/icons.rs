@@ -51,24 +51,24 @@ lazy_static! {
         m.insert(".Trash", '\u{f1f8}'); // 
         m.insert(".atom", '\u{e764}'); // 
         m.insert(".bashprofile", '\u{e615}'); // 
-        m.insert(".bashrc", '\u{f489}'); // 
-        m.insert(".git", '\u{f1d3}'); // 
-        m.insert(".gitattributes", '\u{f1d3}'); // 
-        m.insert(".gitconfig", '\u{f1d3}'); // 
+        m.insert(".bashrc", '\u{ebc7}'); // 
+        m.insert(".git", '\u{e702}'); // 
+        m.insert(".gitattributes", '\u{e702}'); // 
+        m.insert(".gitconfig", '\u{e702}'); // 
         m.insert(".github", '\u{f408}'); // 
-        m.insert(".gitignore", '\u{f1d3}'); // 
-        m.insert(".gitmodules", '\u{f1d3}'); // 
+        m.insert(".gitignore", '\u{e702}'); // 
+        m.insert(".gitmodules", '\u{e702}'); // 
         m.insert(".rvm", '\u{e21e}'); // 
         m.insert(".vimrc", '\u{e62b}'); // 
         m.insert(".vscode", '\u{e70c}'); // 
-        m.insert(".zshrc", '\u{f489}'); // 
+        m.insert(".zshrc", '\u{ebc7}'); // 
         m.insert("Cargo.lock", '\u{e7a8}'); // 
         m.insert("bin", '\u{e5fc}'); // 
         m.insert("config", '\u{e5fc}'); // 
         m.insert("docker-compose.yml", '\u{f308}'); // 
         m.insert("Dockerfile", '\u{f308}'); // 
         m.insert("ds_store", '\u{f179}'); // 
-        m.insert("gitignore_global", '\u{f1d3}'); // 
+        m.insert("gitignore_global", '\u{e702}'); // 
         m.insert("go.mod", '\u{e626}'); // 
         m.insert("go.sum", '\u{e626}'); // 
         m.insert("gradle", '\u{e256}'); // 
@@ -82,13 +82,13 @@ lazy_static! {
         m.insert("include", '\u{e5fc}'); // 
         m.insert("lib", '\u{f121}'); // 
         m.insert("localized", '\u{f179}'); // 
-        m.insert("Makefile", '\u{f489}'); // 
+        m.insert("Makefile", '\u{ebc7}'); // 
         m.insert("node_modules", '\u{e718}'); // 
         m.insert("npmignore", '\u{e71e}'); // 
         m.insert("PKGBUILD", '\u{f303}'); // 
         m.insert("rubydoc", '\u{e73b}'); // 
         m.insert("yarn.lock", '\u{e718}'); // 
-
+        m.insert("README.md", '\u{ea61}'); // 
         m
     };
 }
@@ -100,8 +100,9 @@ pub fn icon_for_file(file: &File<'_>) -> char {
     else if file.points_to_directory() {
         match file.name.as_str() {
             "bin"           => '\u{e5fc}', // 
-            ".git"          => '\u{f1d3}', // 
+            ".git"          => '\u{e702}', // 
             ".idea"         => '\u{e7b5}', // 
+            ".vscode"       => '\u{e70c}', //
             _               => '\u{f07c}'  // 
         }
     }
@@ -115,13 +116,13 @@ pub fn icon_for_file(file: &File<'_>) -> char {
             "avi"           => '\u{f03d}', // 
             "avif"          => '\u{f1c5}', // 
             "avro"          => '\u{e60b}', // 
-            "awk"           => '\u{f489}', // 
-            "bash"          => '\u{f489}', // 
-            "bash_history"  => '\u{f489}', // 
-            "bash_profile"  => '\u{f489}', // 
-            "bashrc"        => '\u{f489}', // 
-            "bat"           => '\u{f17a}', // 
-            "bats"          => '\u{f489}', // 
+            "awk"           => '\u{ebc7}', // 
+            "bash"          => '\u{ebc7}', // 
+            "bash_history"  => '\u{ebc7}', // 
+            "bash_profile"  => '\u{ebc7}', // 
+            "bashrc"        => '\u{ebc7}', // 
+            "bat"           => '\u{ebc4}', // 
+            "bats"          => '\u{ebc7}', // 
             "bmp"           => '\u{f1c5}', // 
             "bz"            => '\u{f410}', // 
             "bz2"           => '\u{f410}', // 
@@ -141,7 +142,7 @@ pub fn icon_for_file(file: &File<'_>) -> char {
             "cpio"          => '\u{f410}', // 
             "cpp"           => '\u{e61d}', // 
             "cs"            => '\u{f81a}', // 
-            "csh"           => '\u{f489}', // 
+            "csh"           => '\u{ebc7}', // 
             "cshtml"        => '\u{f1fa}', // 
             "csproj"        => '\u{f81a}', // 
             "css"           => '\u{e749}', // 
@@ -173,7 +174,7 @@ pub fn icon_for_file(file: &File<'_>) -> char {
             "ex"            => '\u{e62d}', // 
             "exe"           => '\u{f17a}', // 
             "exs"           => '\u{e62d}', // 
-            "fish"          => '\u{f489}', // 
+            "fish"          => '\u{ebc7}', // 
             "flac"          => '\u{f001}', // 
             "flv"           => '\u{f03d}', // 
             "font"          => '\u{f031}', // 
@@ -186,10 +187,10 @@ pub fn icon_for_file(file: &File<'_>) -> char {
             "gemspec"       => '\u{e21e}', // 
             "gform"         => '\u{f298}', // 
             "gif"           => '\u{f1c5}', // 
-            "git"           => '\u{f1d3}', // 
-            "gitattributes" => '\u{f1d3}', // 
-            "gitignore"     => '\u{f1d3}', // 
-            "gitmodules"    => '\u{f1d3}', // 
+            "git"           => '\u{e702}', // 
+            "gitattributes" => '\u{e702}', // 
+            "gitignore"     => '\u{e702}', // 
+            "gitmodules"    => '\u{e702}', // 
             "go"            => '\u{e626}', // 
             "gradle"        => '\u{e256}', // 
             "groovy"        => '\u{e775}', // 
@@ -208,7 +209,7 @@ pub fn icon_for_file(file: &File<'_>) -> char {
             "image"         => '\u{f1c5}', // 
             "img"           => '\u{e271}', // 
             "iml"           => '\u{e7b5}', // 
-            "ini"           => '\u{f17a}', // 
+            "ini"           => '\u{e615}', // 
             "ipynb"         => '\u{e606}', // 
             "iso"           => '\u{e271}', // 
             "j2c"           => '\u{f1c5}', // 
@@ -230,7 +231,7 @@ pub fn icon_for_file(file: &File<'_>) -> char {
             "json"          => '\u{e60b}', // 
             "jsx"           => '\u{e7ba}', // 
             "jxl"           => '\u{f1c5}', // 
-            "ksh"           => '\u{f489}', // 
+            "ksh"           => '\u{ebc7}', // 
             "latex"         => '\u{f034}', // 
             "less"          => '\u{e758}', // 
             "lhs"           => '\u{e777}', // 
@@ -250,7 +251,7 @@ pub fn icon_for_file(file: &File<'_>) -> char {
             "markdown"      => '\u{f48a}', // 
             "md"            => '\u{f48a}', // 
             "mjs"           => '\u{e74e}', // 
-            "mk"            => '\u{f489}', // 
+            "mk"            => '\u{ebc7}', // 
             "mkd"           => '\u{f48a}', // 
             "mkv"           => '\u{f03d}', // 
             "mobi"          => '\u{e28b}', // 
@@ -281,7 +282,7 @@ pub fn icon_for_file(file: &File<'_>) -> char {
             "pptx"          => '\u{f1c4}', // 
             "procfile"      => '\u{e21e}', // 
             "properties"    => '\u{e60b}', // 
-            "ps1"           => '\u{f489}', // 
+            "ps1"           => '\u{ebc7}', // 
             "psd"           => '\u{e7b8}', // 
             "pxm"           => '\u{f1c5}', // 
             "py"            => '\u{e606}', // 
@@ -295,7 +296,7 @@ pub fn icon_for_file(file: &File<'_>) -> char {
             "rdb"           => '\u{e76d}', // 
             "rdoc"          => '\u{f48a}', // 
             "rds"           => '\u{f25d}', // 
-            "readme"        => '\u{f48a}', // 
+            "readme"        => '\u{ea61}', // 
             "rlib"          => '\u{e7a8}', // 
             "rmd"           => '\u{f48a}', // 
             "rpm"           => '\u{e7bb}', // 
@@ -310,8 +311,8 @@ pub fn icon_for_file(file: &File<'_>) -> char {
             "sass"          => '\u{e603}', // 
             "scala"         => '\u{e737}', // 
             "scss"          => '\u{e749}', // 
-            "sh"            => '\u{f489}', // 
-            "shell"         => '\u{f489}', // 
+            "sh"            => '\u{ebc7}', // 
+            "shell"         => '\u{ebc7}', // 
             "slim"          => '\u{e73b}', // 
             "sln"           => '\u{e70c}', // 
             "so"            => '\u{f17c}', // 
@@ -361,9 +362,9 @@ pub fn icon_for_file(file: &File<'_>) -> char {
             "yaml"          => '\u{f481}', // 
             "yml"           => '\u{f481}', // 
             "zip"           => '\u{f410}', // 
-            "zsh"           => '\u{f489}', // 
-            "zsh-theme"     => '\u{f489}', // 
-            "zshrc"         => '\u{f489}', // 
+            "zsh"           => '\u{ebc7}', // 
+            "zsh-theme"     => '\u{ebc7}', // 
+            "zshrc"         => '\u{ebc7}', // 
             "zst"           => '\u{f410}', // 
             _               => '\u{f15b}'  // 
         }

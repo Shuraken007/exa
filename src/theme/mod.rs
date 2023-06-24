@@ -147,12 +147,16 @@ impl Definitions {
 
 pub trait FileColours: std::marker::Sync {
     fn colour_file(&self, file: &File<'_>) -> Option<Style>;
+    fn colour_dir(&self, file: &File<'_>) -> Option<Style>;
 }
 
 #[derive(PartialEq, Debug)]
 struct NoFileColours;
 impl FileColours for NoFileColours {
     fn colour_file(&self, _file: &File<'_>) -> Option<Style> {
+        None
+    }
+    fn colour_dir(&self, _file: &File<'_>) -> Option<Style> {
         None
     }
 }
@@ -169,6 +173,10 @@ where A: FileColours,
         self.0.colour_file(file)
             .or_else(|| self.1.colour_file(file))
     }
+    fn colour_dir(&self, file: &File<'_>) -> Option<Style> {
+        self.0.colour_dir(file)
+            .or_else(|| self.1.colour_dir(file))
+    }
 }
 
 
@@ -182,6 +190,11 @@ struct ExtensionMappings {
 
 impl FileColours for ExtensionMappings {
     fn colour_file(&self, file: &File<'_>) -> Option<Style> {
+        self.mappings.iter().rev()
+            .find(|t| t.0.matches(&file.name))
+            .map (|t| t.1)
+    }
+    fn colour_dir(&self, file: &File<'_>) -> Option<Style> {
         self.mappings.iter().rev()
             .find(|t| t.0.matches(&file.name))
             .map (|t| t.1)
@@ -305,6 +318,9 @@ impl FileNameColours for Theme {
 
     fn colour_file(&self, file: &File<'_>) -> Style {
         self.exts.colour_file(file).unwrap_or(self.ui.filekinds.normal)
+    }
+    fn colour_dir(&self, file: &File<'_>) -> Style {
+        self.exts.colour_dir(file).unwrap_or(self.ui.filekinds.normal)
     }
 }
 

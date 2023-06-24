@@ -126,9 +126,43 @@ impl<'a, 'dir, C: Colours> FileName<'a, 'dir, C> {
         let mut bits = Vec::new();
 
         if let ShowIcons::On(spaces_count) = self.options.show_icons {
-            let style = iconify_style(self.style());
+            let mut style = iconify_style(self.style());
             let file_icon = icon_for_file(self.file).to_string();
 
+            if let (LinkStyle::FullLinkPaths, Some(target)) = (self.link_style, self.target.as_ref()) {
+                match target {
+                    FileTarget::Ok(target) => {
+                        if ! target.name.is_empty() {
+                            let target_options = Options {
+                                classify: Classify::JustFilenames,
+                                show_icons: ShowIcons::Off,
+                            };
+
+                            let target_file = FileName {
+                                file: target,
+                                colours: self.colours,
+                                target: None,
+                                link_style: LinkStyle::FullLinkPaths,
+                                options: target_options,
+                            };
+                            if target.is_executable_file() {
+                                style = self.colours.executable_file()
+                            } else {
+                                style = iconify_style(target_file.style());
+                            }
+                        }
+                    }
+
+                    FileTarget::Broken(broken_path) => {
+                        // Do nothing — the error gets displayed on the next line
+                    }
+
+                    FileTarget::Err(_) => {
+                        // Do nothing — the error gets displayed on the next line
+                    }
+                }
+            }
+            let file_icon = icon_for_file(self.file).to_string();
             bits.push(style.paint(file_icon));
 
             match spaces_count {
@@ -316,10 +350,10 @@ impl<'a, 'dir, C: Colours> FileName<'a, 'dir, C> {
         }
 
         match self.file {
-            f if f.is_directory()        => self.colours.directory(),
+            f if f.is_directory()        => self.colours.colour_dir(self.file),
             #[cfg(unix)]
             f if f.is_executable_file()  => self.colours.executable_file(),
-            f if f.is_link()             => self.colours.symlink(),
+            f if f.is_link()             => self.colours.colour_file(self.file),
             #[cfg(unix)]
             f if f.is_pipe()             => self.colours.pipe(),
             #[cfg(unix)]
@@ -364,6 +398,7 @@ pub trait Colours: FiletypeColours {
     fn executable_file(&self) -> Style;
 
     fn colour_file(&self, file: &File<'_>) -> Style;
+    fn colour_dir(&self, file: &File<'_>) -> Style;
 }
 
 
