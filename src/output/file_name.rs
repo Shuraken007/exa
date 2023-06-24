@@ -287,7 +287,9 @@ impl<'a, 'dir, C: Colours> FileName<'a, 'dir, C> {
     /// So in that situation, those characters will be escaped and highlighted in
     /// a different colour.
     fn coloured_file_name<'unused>(&self) -> Vec<ANSIString<'unused>> {
-        let file_style = self.style();
+        // let file_style = self.style();
+        use ansi_term::Colour::*;
+        let file_style = Fixed(252).normal();
         let mut bits = Vec::new();
 
         escape(

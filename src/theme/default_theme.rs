@@ -12,14 +12,14 @@ impl UiStyles {
 
             filekinds: FileKinds {
                 normal:       Style::default(),
-                directory:    Blue.bold(),
+                directory:    Fixed(244).bold(),
                 symlink:      Cyan.normal(),
                 pipe:         Yellow.normal(),
                 block_device: Yellow.bold(),
                 char_device:  Yellow.bold(),
                 socket:       Red.bold(),
                 special:      Yellow.normal(),
-                executable:   Green.bold(),
+                executable:   Fixed(208).bold(),
             },
 
             perms: Permissions {
