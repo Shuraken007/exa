@@ -46,7 +46,7 @@ r".*theme.*",
 - folder contains `.*script.*` - folder with execution files
 - folder contains `man.*` - folder with docs files
 
-[screen1](Screenshot_2.png)
-[screen2](Screenshot_3.png)
-[screen3](Screenshot_4.png)
-[screen4](Screenshot_5.png)
+![screen1](Screenshot_2.png)
+![screen2](Screenshot_3.png)
+![screen3](Screenshot_4.png)
+![screen4](Screenshot_5.png)
