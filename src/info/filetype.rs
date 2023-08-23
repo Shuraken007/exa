@@ -166,9 +166,13 @@ impl FileExtensions {
     }
 
     fn is_vim(&self, file: &File<'_>) -> bool {
+        let name_ext = RegexSet::new(&[
+            r".*vim.*",
+        ]).unwrap();
         let set_ext = RegexSet::new(&[
             r".*vim.*",
         ]).unwrap();
+        file.name_matches_set( name_ext ) || 
         file.extension_matches_set( set_ext )
     }
 
@@ -245,6 +249,9 @@ impl FileColours for FileExtensions {
 impl FileIcon for FileExtensions {
     fn icon_file(&self, file: &File<'_>) -> Option<char> {
         use crate::output::icons::Icons;
+        let set_vim_name = RegexSet::new(&[
+            r".*vim.*",
+        ]).unwrap();
         let set_vim_ext = RegexSet::new(&[
             r".*vim.*",
         ]).unwrap();
@@ -263,7 +270,8 @@ impl FileIcon for FileExtensions {
         }
         else if self.is_video(file) {
             Some(Icons::Video.value())
-        } else if file.extension_matches_set( set_vim_ext ) {
+        } else if file.extension_matches_set( set_vim_ext ) ||
+                  file.name_matches_set( set_vim_name ) {
             Some('\u{e62b}')
         } else if file.extension_matches_set( set_sh_ext ) {
             Some('\u{ebc7}')

@@ -273,7 +273,7 @@ pub fn icon_for_file(file: &File<'_>) -> char {
             "patch"         => '\u{f440}', // 
             "pdf"           => '\u{f1c1}', // 
             "php"           => '\u{e73d}', // 
-            "pl"            => '\u{e769}', // 
+            "pl"            => '\u{e67e}', // 
             "plx"           => '\u{e769}', // 
             "pm"            => '\u{e769}', // 
             "png"           => '\u{f1c5}', // 
@@ -323,7 +323,7 @@ pub fn icon_for_file(file: &File<'_>) -> char {
             "stylus"        => '\u{e600}', // 
             "svg"           => '\u{f1c5}', // 
             "swift"         => '\u{e755}', // 
-            "t"             => '\u{e769}', // 
+            "t"             => '\u{e67e}', // 
             "tar"           => '\u{f410}', // 
             "taz"           => '\u{f410}', // 
             "tbz"           => '\u{f410}', // 
