@@ -81,7 +81,7 @@ impl Mode {
         // user about flags that won’t have any effect.
         if matches.is_strict() {
             for option in &[ &flags::BINARY, &flags::BYTES, &flags::INODE, &flags::LINKS,
-                             &flags::HEADER, &flags::BLOCKS, &flags::TIME, &flags::GROUP, &flags::NUMERIC ] {
+                             &flags::HEADER, &flags::BLOCKS, &flags::TIME, &flags::GROUP, &flags::NUMERIC, &flags::PATH ] {
                 if matches.has(option)? {
                     return Err(OptionsError::Useless(*option, false, &flags::LONG));
                 }
@@ -211,7 +211,9 @@ impl Columns {
         let filesize =    ! matches.has(&flags::NO_FILESIZE)?;
         let user =        ! matches.has(&flags::NO_USER)?;
 
-        Ok(Self { time_types, inode, links, blocks, group, git, octal, permissions, filesize, user })
+        let path =          matches.has(&flags::PATH)?;
+
+        Ok(Self { time_types, inode, links, blocks, group, git, octal, permissions, filesize, user, path })
     }
 }
 

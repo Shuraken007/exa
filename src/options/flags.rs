@@ -66,6 +66,8 @@ pub static GIT:       Arg = Arg { short: None,       long: "git",               
 pub static EXTENDED:  Arg = Arg { short: Some(b'@'), long: "extended",          takes_value: TakesValue::Forbidden };
 pub static OCTAL:     Arg = Arg { short: None,       long: "octal-permissions", takes_value: TakesValue::Forbidden };
 
+// my own features
+pub static PATH:  Arg = Arg { short: Some(b'p'), long: "add-path",  takes_value: TakesValue::Forbidden };
 
 pub static ALL_ARGS: Args = Args(&[
     &VERSION, &HELP,
@@ -80,5 +82,7 @@ pub static ALL_ARGS: Args = Args(&[
     &BLOCKS, &TIME, &ACCESSED, &CREATED, &TIME_STYLE,
     &NO_PERMISSIONS, &NO_FILESIZE, &NO_USER, &NO_TIME, &NO_ICONS,
 
-    &GIT, &EXTENDED, &OCTAL
+    &GIT, &EXTENDED, &OCTAL,
+
+    &PATH
 ]);

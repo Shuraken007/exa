@@ -49,11 +49,17 @@ pub struct Columns {
     pub permissions: bool,
     pub filesize: bool,
     pub user: bool,
+
+    pub path: bool,
 }
 
 impl Columns {
     pub fn collect(&self, actually_enable_git: bool) -> Vec<Column> {
         let mut columns = Vec::with_capacity(4);
+
+        if self.path {
+            columns.push(Column::Path);
+        }
 
         if self.inode {
             #[cfg(unix)]
@@ -121,6 +127,7 @@ impl Columns {
 /// A table contains these.
 #[derive(Debug, Copy, Clone)]
 pub enum Column {
+    Path,
     Permissions,
     FileSize,
     Timestamp(TimeType),
@@ -153,6 +160,7 @@ impl Column {
     #[cfg(unix)]
     pub fn alignment(self) -> Alignment {
         match self {
+            Self::Path       |
             Self::FileSize   |
             Self::HardLinks  |
             Self::Inode      |
@@ -165,6 +173,7 @@ impl Column {
     #[cfg(windows)]
     pub fn alignment(&self) -> Alignment {
         match self {
+            Self::Path       |
             Self::FileSize   |
             Self::GitStatus  => Alignment::Right,
             _                => Alignment::Left,
@@ -175,6 +184,7 @@ impl Column {
     /// to have a header row printed.
     pub fn header(self) -> &'static str {
         match self {
+            Self::Path          => "Path",
             #[cfg(unix)]
             Self::Permissions   => "Permissions",
             #[cfg(windows)]
@@ -467,6 +477,13 @@ impl<'a, 'f> Table<'a> {
 
     fn display(&self, file: &File<'_>, column: Column, xattrs: bool) -> TextCell {
         match column {
+            Column::Path => {
+                use ansi_term::Style;
+                TextCell::paint(
+                    Style::default(), 
+                    file.path.display().to_string() + ":"
+                )
+            }
             Column::Permissions => {
                 self.permissions_plus(file, xattrs).render(self.theme)
             }
