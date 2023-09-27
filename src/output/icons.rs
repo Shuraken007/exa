@@ -141,7 +141,7 @@ pub fn icon_for_file(file: &File<'_>) -> char {
             "cp"            => '\u{e61d}', // 
             "cpio"          => '\u{f410}', // 
             "cpp"           => '\u{e61d}', // 
-            "cs"            => '\u{f81a}', // 
+            "cs"            => '\u{e648}', // 
             "csh"           => '\u{ebc7}', // 
             "cshtml"        => '\u{f1fa}', // 
             "csproj"        => '\u{f81a}', // 
@@ -366,6 +366,7 @@ pub fn icon_for_file(file: &File<'_>) -> char {
             "zsh-theme"     => '\u{ebc7}', // 
             "zshrc"         => '\u{ebc7}', // 
             "zst"           => '\u{f410}', // 
+            "xi"            => '\u{f168}', // 
             _               => '\u{f15b}'  // 
         }
     }

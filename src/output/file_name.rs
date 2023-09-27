@@ -145,10 +145,10 @@ impl<'a, 'dir, C: Colours> FileName<'a, 'dir, C> {
                                 link_style: LinkStyle::FullLinkPaths,
                                 options: target_options,
                             };
+                            style = iconify_style(target_file.style());
+                            #[cfg(unix)]
                             if target.is_executable_file() {
                                 style = self.colours.executable_file()
-                            } else {
-                                style = iconify_style(target_file.style());
                             }
                         }
                     }
