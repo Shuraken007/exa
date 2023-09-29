@@ -367,6 +367,8 @@ pub fn icon_for_file(file: &File<'_>) -> char {
             "zshrc"         => '\u{ebc7}', // 
             "zst"           => '\u{f410}', // 
             "xi"            => '\u{f168}', // 
+            "chm"           => '\u{ebcc}', // 
+            "7z"            => '\u{f410}', // 
             _               => '\u{f15b}'  // 
         }
     }
