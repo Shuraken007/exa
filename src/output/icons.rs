@@ -144,7 +144,7 @@ pub fn icon_for_file(file: &File<'_>) -> char {
             "cs"            => '\u{e648}', // 
             "csh"           => '\u{ebc7}', // 
             "cshtml"        => '\u{f1fa}', // 
-            "csproj"        => '\u{f81a}', // 
+            "csproj"        => '\u{f0a1e}', // 
             "css"           => '\u{e749}', // 
             "csv"           => '\u{f1c3}', // 
             "csx"           => '\u{f81a}', // 

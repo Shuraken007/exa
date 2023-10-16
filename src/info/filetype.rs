@@ -147,7 +147,7 @@ impl FileExtensions {
 
     fn is_language(&self, file: &File<'_>) -> bool {
         file.extension_is_one_of( &[
-            "as", "ai", "applescript", "scpt", "cs", "cpp", 
+            "as", "ai", "applescript", "scpt", "cs", "csproj", "cpp", 
             "hpp", "c", "h", "clj", "coffee", "css", "erb", "less",
             "sass", "erb", "liquid", "lua", "scss", "styl", "d", "ex",
             "erl", "eot", "otf", "ttf", "woff", "go", "dot", "gv",
