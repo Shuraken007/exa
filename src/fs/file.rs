@@ -496,7 +496,7 @@ impl<'dir> File<'dir> {
             None       => false,
         }
     }
-    pub fn extension_matches_set(&self, set: RegexSet) -> bool {
+    pub fn extension_matches_set(&self, set: &RegexSet) -> bool {
         match &self.ext {
             Some(ext)  => set.is_match(&&ext[..]),
             None       => false,
@@ -508,7 +508,7 @@ impl<'dir> File<'dir> {
     pub fn name_is_one_of(&self, choices: &[&str]) -> bool {
         choices.contains(&&self.name[..])
     }
-    pub fn name_matches_set(&self, set: RegexSet) -> bool {
+    pub fn name_matches_set(&self, set: &RegexSet) -> bool {
         set.is_match(&&self.name[..])
     }
 }

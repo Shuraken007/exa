@@ -11,6 +11,8 @@ use crate::output::icons::FileIcon;
 use crate::theme::FileColours;
 use regex::RegexSet;
 
+use lazy_static::lazy_static;
+
 #[derive(Debug, Default, PartialEq, Eq)]
 pub struct FileExtensions;
 
@@ -80,27 +82,28 @@ impl FileExtensions {
     }
 
     fn is_config(&self, file: &File<'_>) -> bool {
-        let set_ext = RegexSet::new(&[
-            r".*ignore",
-            r".*settings.*",
-            r".*theme.*",
-            r".*settings.*",
-            r".*theme.*",
-        ]).unwrap();
-        let set_name = RegexSet::new(&[
-            r".*settings.*",
-            r".*theme.*",
-            r".*settings.*",
-            r".*theme.*",
-        ]).unwrap();
-
+        lazy_static! {
+            static ref SET_EXT: RegexSet = RegexSet::new(&[
+                r".*ignore",
+                r".*settings.*",
+                r".*theme.*",
+                r".*settings.*",
+                r".*theme.*",
+            ]).unwrap();
+            static ref SET_NAME: RegexSet = RegexSet::new(&[
+                r".*settings.*",
+                r".*theme.*",
+                r".*settings.*",
+                r".*theme.*",
+            ]).unwrap();
+        }
         file.extension_is_one_of( &[
             "toml", "ini", "conf", "config",
             "yml", "gitignore", "gitmodules",
         ]) || file.name_is_one_of( &[
             "conf", "config"
-        ]) || file.extension_matches_set(set_ext)
-           || file.name_matches_set(set_name)
+        ]) || file.extension_matches_set(&SET_EXT)
+           || file.name_matches_set(&SET_NAME)
     }
 
     fn is_compressed(&self, file: &File<'_>) -> bool {
@@ -131,17 +134,18 @@ impl FileExtensions {
     }
 
     fn is_script(&self, file: &File<'_>) -> bool {
-        let set_sh_ext = RegexSet::new(&[
-            r".*bash.*",
-            r".*zsh.*",
-            r"^sh_",
-            r"_sh$",
-        ]).unwrap();
-
+        lazy_static! {
+            static ref SET_SH_EXT: RegexSet = RegexSet::new(&[
+                r".*bash.*",
+                r".*zsh.*",
+                r"^sh_",
+                r"_sh$",
+            ]).unwrap();
+        }
         file.extension_is_one_of( &[
             "bashrc", "zshrc", "sh", "zsh", "bash", 
             "profile", "bash_profile", "fish",
-        ]) || file.extension_matches_set( set_sh_ext )
+        ]) || file.extension_matches_set( &SET_SH_EXT )
         
     }
 
@@ -166,14 +170,16 @@ impl FileExtensions {
     }
 
     fn is_vim(&self, file: &File<'_>) -> bool {
-        let name_ext = RegexSet::new(&[
-            r".*vim.*",
-        ]).unwrap();
-        let set_ext = RegexSet::new(&[
-            r".*vim.*",
-        ]).unwrap();
-        file.name_matches_set( name_ext ) || 
-        file.extension_matches_set( set_ext )
+        lazy_static! {
+            static ref NAME_EXT: RegexSet = RegexSet::new(&[
+                r".*vim.*",
+            ]).unwrap();
+            static ref SET_EXT: RegexSet = RegexSet::new(&[
+                r".*vim.*",
+            ]).unwrap();
+        }
+        file.name_matches_set( &NAME_EXT ) || 
+        file.extension_matches_set( &SET_EXT )
     }
 
     fn is_config_folder(&self, file: &File<'_>) -> bool {
@@ -183,30 +189,36 @@ impl FileExtensions {
     }
 
     fn is_folder_with_language_files(&self, file: &File<'_>) -> bool {
-        let set_name = RegexSet::new(&[
-            r".*test.*",
-        ]).unwrap();
+        lazy_static! {
+            static ref SET_NAME: RegexSet = RegexSet::new(&[
+                r".*test.*",
+            ]).unwrap();
+        }
         file.name_is_one_of( &[
             "src", "lib"
-        ]) || file.name_matches_set( set_name )
+        ]) || file.name_matches_set( &SET_NAME )
     }
 
     fn is_folder_with_exe_files(&self, file: &File<'_>) -> bool {
-        let set_name = RegexSet::new(&[
-            r".*script.*",
-        ]).unwrap();
+        lazy_static! {
+            static ref SET_NAME: RegexSet = RegexSet::new(&[
+                r".*script.*",
+            ]).unwrap();
+        }
         file.name_is_one_of( &[
             "target", "bin"
-        ]) || file.name_matches_set( set_name )
+        ]) || file.name_matches_set( &SET_NAME )
     }
 
     fn is_folder_with_document_files(&self, file: &File<'_>) -> bool {
-        let set_name = RegexSet::new(&[
-            r"man.*",
-        ]).unwrap();
+        lazy_static! {
+            static ref SET_NAME: RegexSet = RegexSet::new(&[
+                r"man.*",
+            ]).unwrap();
+        }
         file.name_is_one_of( &[
             "doc"
-        ]) || file.name_matches_set( set_name )
+        ]) || file.name_matches_set( &SET_NAME )
     }
 }
 
@@ -249,19 +261,20 @@ impl FileColours for FileExtensions {
 impl FileIcon for FileExtensions {
     fn icon_file(&self, file: &File<'_>) -> Option<char> {
         use crate::output::icons::Icons;
-        let set_vim_name = RegexSet::new(&[
-            r".*vim.*",
-        ]).unwrap();
-        let set_vim_ext = RegexSet::new(&[
-            r".*vim.*",
-        ]).unwrap();
-        let set_sh_ext = RegexSet::new(&[
-            r".*bash.*",
-            r".*zsh.*",
-            r"^sh_",
-            r"_sh$",
-        ]).unwrap();
-        
+        lazy_static! {
+            static ref SET_VIM_NAME: RegexSet = RegexSet::new(&[
+                r".*vim.*",
+            ]).unwrap();
+            static ref SET_VIM_EXT: RegexSet = RegexSet::new(&[
+                r".*vim.*",
+            ]).unwrap();
+            static ref SET_SH_EXT: RegexSet = RegexSet::new(&[
+                r".*bash.*",
+                r".*zsh.*",
+                r"^sh_",
+                r"_sh$",
+            ]).unwrap();
+        }
         if self.is_music(file) || self.is_lossless(file) {
             Some(Icons::Audio.value())
         }
@@ -270,10 +283,10 @@ impl FileIcon for FileExtensions {
         }
         else if self.is_video(file) {
             Some(Icons::Video.value())
-        } else if file.extension_matches_set( set_vim_ext ) ||
-                  file.name_matches_set( set_vim_name ) {
+        } else if file.extension_matches_set( &SET_VIM_EXT ) ||
+                  file.name_matches_set( &SET_VIM_NAME ) {
             Some('\u{e62b}')
-        } else if file.extension_matches_set( set_sh_ext ) {
+        } else if file.extension_matches_set( &SET_SH_EXT ) {
             Some('\u{ebc7}')
         }
         else {

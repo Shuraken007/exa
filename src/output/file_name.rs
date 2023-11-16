@@ -127,7 +127,6 @@ impl<'a, 'dir, C: Colours> FileName<'a, 'dir, C> {
 
         if let ShowIcons::On(spaces_count) = self.options.show_icons {
             let mut style = iconify_style(self.style());
-            let file_icon = icon_for_file(self.file).to_string();
 
             if let (LinkStyle::FullLinkPaths, Some(target)) = (self.link_style, self.target.as_ref()) {
                 match target {

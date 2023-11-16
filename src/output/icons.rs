@@ -5,7 +5,6 @@ use crate::info::filetype::FileExtensions;
 use lazy_static::lazy_static;
 use std::collections::HashMap;
 
-
 pub trait FileIcon {
     fn icon_file(&self, file: &File<'_>) -> Option<char>;
 }
