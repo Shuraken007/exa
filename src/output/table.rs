@@ -481,7 +481,7 @@ impl<'a, 'f> Table<'a> {
                 use ansi_term::Style;
                 TextCell::paint(
                     Style::default(), 
-                    file.path.display().to_string() + "|"
+                    file.path.display().to_string() + "!"
                 )
             }
             Column::Permissions => {
